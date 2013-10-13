@@ -6,11 +6,15 @@
 //  Copyright (c) 2013 Julien Claverie. All rights reserved.
 //
 
+//	I wish I had time to add a button to select sorting by alphabetical order or by rotten tomatoes score
+//	and also I didn't have time to show the score and rating on the UITableViewCell
+
 #import "AppDelegate.h"
 
 #import "TBXML.h"
 #import "TBXML+HTTP.h"
 #import "Film.h"
+#import "SBJson.h"
 
 @implementation AppDelegate
 
@@ -65,6 +69,10 @@
         // If TBXML found a root node, process element and iterate all children
         if (tbxmlDocument.rootXMLElement) {
 			
+			if (!jsonParser) {
+				jsonParser = [[SBJsonParser alloc] init];
+			}
+			
 			NSMutableArray *filmArray = [NSMutableArray array];
 			
 			[TBXML iterateElementsForQuery:@"entry" fromElement:tbxml.rootXMLElement withBlock:^(TBXMLElement *anElement) {
@@ -91,6 +99,29 @@
 					//NSLog(@"Image: %@", film.imageURL);
 					
 					[filmArray addObject:film];
+					
+					// Download the Rotten Tomatoes Score asynchronously
+					NSString *urlString = [NSString stringWithFormat:@"http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=qrbt5gajqa75qutk6mftdjvk&q=%@&page_limit=1", [film.title stringByReplacingOccurrencesOfString:@" " withString:@"+"]]; // Added page_limit to download only the first movie and also we need to escape the space charater and replace it by "+"
+					
+					//NSLog(@"URL: %@", [NSURL URLWithString:urlString]);
+					
+					[self downloadJSONWithURL:[NSURL URLWithString:urlString] completionBlock:^(BOOL succeeded, NSData *json) {
+						if (succeeded) {
+							
+							//NSLog(@"%@", [NSString stringWithUTF8String:[json bytes]]);
+							
+							NSDictionary *jsonObjects = [jsonParser objectWithData:json];
+							//NSLog(@"Objects: %@", jsonObjects);
+							NSDictionary *movie = [((NSArray *)jsonObjects[@"movies"]) objectAtIndex:0];
+							NSDictionary *ratings = movie[@"ratings"];
+							
+							film.score = ratings[@"critics_score"];
+							film.rating = ratings[@"critics_rating"];
+							
+							NSLog(@"Score: %@", film.score);
+							NSLog(@"Rating: %@", film.rating);
+						}
+					}];
 				}
 			}];
 			
@@ -107,6 +138,22 @@
 	tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://feeds.bbc.co.uk/iplayer/categories/films/tv/list"]
                                success:successBlock
                                failure:failureBlock];
+}
+
+// Copied and modified from downloadImageWithURL in MasterViewController
+- (void)downloadJSONWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, NSData *json))completionBlock
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if (!error) {
+								   //NSString *json = [NSString stringWithUTF8String:[data bytes]];
+								   completionBlock(YES, data);
+							   } else {
+								   completionBlock(NO, nil);
+							   }
+                           }];
 }
 
 @end

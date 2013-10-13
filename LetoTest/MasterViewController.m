@@ -79,8 +79,12 @@
 		
 		NSMutableArray *array = [notice object];
 		
-		// Sort the array by title alphabetically
-		NSSortDescriptor *sortDesc = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+//		// Sort the array by title alphabetically
+//		NSSortDescriptor *sortDesc = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+//		[array sortUsingDescriptors:@[sortDesc]];
+		
+		// Sort by rotten tomatoes score
+		NSSortDescriptor *sortDesc = [[NSSortDescriptor alloc] initWithKey:@"score" ascending:NO];
 		[array sortUsingDescriptors:@[sortDesc]];
 		
 		_objects = nil;

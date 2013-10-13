@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @class TBXML;
+@class SBJsonParser;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
 	TBXML *tbxml;
+	SBJsonParser *jsonParser;
 }
 
 @property (strong, nonatomic) UIWindow *window;
