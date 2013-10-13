@@ -74,7 +74,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Faa-8g-0mQ">
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Faa-8g-0mQ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -84,6 +84,12 @@
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Faa-8g-0mQ" secondAttribute="bottom" id="EhW-AQ-2ph"/>
+                            <constraint firstItem="Faa-8g-0mQ" firstAttribute="top" secondItem="MMQ-IT-qOo" secondAttribute="top" id="UBJ-zN-GSM"/>
+                            <constraint firstItem="Faa-8g-0mQ" firstAttribute="leading" secondItem="MMQ-IT-qOo" secondAttribute="leading" id="gZm-NR-PcA"/>
+                            <constraint firstAttribute="trailing" secondItem="Faa-8g-0mQ" secondAttribute="trailing" id="h48-Qe-8th"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Film" id="cra-N8-TIN"/>
                     <connections>

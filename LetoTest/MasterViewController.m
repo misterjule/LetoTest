@@ -28,7 +28,17 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	
+	// Register to receive the new array of films
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupNewObjects:) name:@"FilmArray" object:nil];
+	
+	// Add a refresh control to the top of the table view (aka pull to refresh)
+	UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+	[refreshControl addTarget:self action:@selector(refreshFilms) forControlEvents:UIControlEventValueChanged];
+	self.refreshControl = refreshControl;
+	
+	// Refresh the list of films
+	[self.refreshControl beginRefreshing];
+	[self refreshFilms];
 	
 //	self.navigationItem.leftBarButtonItem = self.editButtonItem;
 //
@@ -60,6 +70,8 @@
 }
  */
 
+#pragma mark Data Source and Update
+
 - (void)setupNewObjects:(NSNotification *)notice
 {
 	// Make sure we receive our Array of films
@@ -74,8 +86,50 @@
 		_objects = nil;
 		_objects = array;
 		
-		[self.tableView reloadData];
+		[self updateTable];
 	}
+}
+
+- (void)updateTable
+{
+	[self.tableView reloadData];
+	
+	[self.refreshControl endRefreshing];
+}
+
+- (void)refreshFilms
+{
+	// Sends notification to AppDelegate to reload the film list from BBC
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshFilms" object:nil];
+}
+
+#pragma mark Thumbnail image download
+
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if (!error) {
+								   UIImage *image = [[UIImage alloc] initWithData:data];
+								   completionBlock(YES, image);
+							   } else {
+								   completionBlock(NO, nil);
+							   }
+                           }];
+}
+
+// To resize the image and make it look good in the cell
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize
+{
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+	
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+	
+    return newImage;
 }
 
 #pragma mark - Table View
@@ -96,6 +150,26 @@
 
 	Film *object = _objects[indexPath.row];
 	cell.textLabel.text = [object title];
+	
+	if (object.image) {
+        cell.imageView.image = object.image;
+    } else {
+        // set default user image while image is being downloaded
+        cell.imageView.image = [UIImage imageNamed:@"video2.png"];
+		
+        // download the image asynchronously
+        [self downloadImageWithURL:[NSURL URLWithString:object.imageURL] completionBlock:^(BOOL succeeded, UIImage *image) {
+            if (succeeded) {
+				// cache the image for use later (when scrolling up)
+                object.image = [self imageWithImage:image scaledToSize:CGSizeMake(57, 32)];
+				
+                // change the image in the cell
+                cell.imageView.image = object.image;
+				
+				[cell setNeedsLayout];
+			}
+        }];
+    }
 	
     return cell;
 }

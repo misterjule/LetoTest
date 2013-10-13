@@ -18,8 +18,10 @@
 {
     // Override point for customization after application launch.
 	
-	// Load XML at startup
-	[self loadURL];
+//	// Load XML at startup
+//	[self loadURL];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadURL) name:@"RefreshFilms" object:nil];
 	
     return YES;
 }
@@ -85,8 +87,8 @@
 					film.url = [TBXML valueOfAttributeNamed:@"href" forElement:link];
 					film.imageURL = [TBXML valueOfAttributeNamed:@"url" forElement:image];
 					
-					NSLog(@"Title: %@", film.title);
-					NSLog(@"Image: %@", film.imageURL);
+					//NSLog(@"Title: %@", film.title);
+					//NSLog(@"Image: %@", film.imageURL);
 					
 					[filmArray addObject:film];
 				}

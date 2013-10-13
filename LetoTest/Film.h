@@ -14,6 +14,7 @@
 @property (nonatomic, retain) NSString *url;
 @property (nonatomic, retain) NSString *desc;
 @property (nonatomic, retain) NSString *imageURL;
+@property (nonatomic, retain) UIImage *image;
 @property (nonatomic, retain) NSNumber *score;
 @property (nonatomic, retain) NSString *rating;
 

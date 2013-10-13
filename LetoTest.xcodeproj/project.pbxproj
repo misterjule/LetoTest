@@ -27,6 +27,7 @@
 		A5D79324180AD724006047C1 /* TBXML+HTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D7931E180AD724006047C1 /* TBXML+HTTP.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A5D79327180AD8E3006047C1 /* Film.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D79326180AD8E3006047C1 /* Film.m */; };
 		A5D79329180ADA13006047C1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D79328180ADA13006047C1 /* libz.dylib */; };
+		A5D7932B180AE9FD006047C1 /* video2.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D7932A180AE9FD006047C1 /* video2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		A5D79325180AD8E3006047C1 /* Film.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Film.h; sourceTree = "<group>"; };
 		A5D79326180AD8E3006047C1 /* Film.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Film.m; sourceTree = "<group>"; };
 		A5D79328180ADA13006047C1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		A5D7932A180AE9FD006047C1 /* video2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 		A5D792EA180AD5CE006047C1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A5D7932A180AE9FD006047C1 /* video2.png */,
 				A5D792EB180AD5CE006047C1 /* LetoTest-Info.plist */,
 				A5D792EC180AD5CE006047C1 /* InfoPlist.strings */,
 				A5D792EF180AD5CE006047C1 /* main.m */,
@@ -267,6 +270,7 @@
 			files = (
 				A5D792FF180AD5CE006047C1 /* Images.xcassets in Resources */,
 				A5D792EE180AD5CE006047C1 /* InfoPlist.strings in Resources */,
+				A5D7932B180AE9FD006047C1 /* video2.png in Resources */,
 				A5D792F7180AD5CE006047C1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
