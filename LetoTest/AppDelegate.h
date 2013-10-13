@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class TBXML;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+{
+	TBXML *tbxml;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

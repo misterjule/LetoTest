@@ -22,6 +22,11 @@
 		A5D79308180AD5CE006047C1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D792E7180AD5CE006047C1 /* UIKit.framework */; };
 		A5D79310180AD5CE006047C1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5D7930E180AD5CE006047C1 /* InfoPlist.strings */; };
 		A5D79312180AD5CE006047C1 /* LetoTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D79311180AD5CE006047C1 /* LetoTestTests.m */; };
+		A5D79322180AD724006047C1 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D7931C180AD724006047C1 /* TBXML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A5D79323180AD724006047C1 /* TBXML+Compression.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D7931D180AD724006047C1 /* TBXML+Compression.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A5D79324180AD724006047C1 /* TBXML+HTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D7931E180AD724006047C1 /* TBXML+HTTP.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A5D79327180AD8E3006047C1 /* Film.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D79326180AD8E3006047C1 /* Film.m */; };
+		A5D79329180ADA13006047C1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D79328180ADA13006047C1 /* libz.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +61,15 @@
 		A5D7930D180AD5CE006047C1 /* LetoTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LetoTestTests-Info.plist"; sourceTree = "<group>"; };
 		A5D7930F180AD5CE006047C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A5D79311180AD5CE006047C1 /* LetoTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LetoTestTests.m; sourceTree = "<group>"; };
+		A5D7931C180AD724006047C1 /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
+		A5D7931D180AD724006047C1 /* TBXML+Compression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBXML+Compression.m"; sourceTree = "<group>"; };
+		A5D7931E180AD724006047C1 /* TBXML+HTTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBXML+HTTP.m"; sourceTree = "<group>"; };
+		A5D7931F180AD724006047C1 /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
+		A5D79320180AD724006047C1 /* TBXML+Compression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+Compression.h"; sourceTree = "<group>"; };
+		A5D79321180AD724006047C1 /* TBXML+HTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+HTTP.h"; sourceTree = "<group>"; };
+		A5D79325180AD8E3006047C1 /* Film.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Film.h; sourceTree = "<group>"; };
+		A5D79326180AD8E3006047C1 /* Film.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Film.m; sourceTree = "<group>"; };
+		A5D79328180ADA13006047C1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5D79329180ADA13006047C1 /* libz.dylib in Frameworks */,
 				A5D792E6180AD5CE006047C1 /* CoreGraphics.framework in Frameworks */,
 				A5D792E8180AD5CE006047C1 /* UIKit.framework in Frameworks */,
 				A5D792E4180AD5CE006047C1 /* Foundation.framework in Frameworks */,
@@ -104,6 +119,7 @@
 		A5D792E2180AD5CE006047C1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5D79328180ADA13006047C1 /* libz.dylib */,
 				A5D792E3180AD5CE006047C1 /* Foundation.framework */,
 				A5D792E5180AD5CE006047C1 /* CoreGraphics.framework */,
 				A5D792E7180AD5CE006047C1 /* UIKit.framework */,
@@ -115,6 +131,7 @@
 		A5D792E9180AD5CE006047C1 /* LetoTest */ = {
 			isa = PBXGroup;
 			children = (
+				A5D7931B180AD703006047C1 /* TBXML */,
 				A5D792F2180AD5CE006047C1 /* AppDelegate.h */,
 				A5D792F3180AD5CE006047C1 /* AppDelegate.m */,
 				A5D792F5180AD5CE006047C1 /* Main.storyboard */,
@@ -124,6 +141,8 @@
 				A5D792FC180AD5CE006047C1 /* DetailViewController.m */,
 				A5D792FE180AD5CE006047C1 /* Images.xcassets */,
 				A5D792EA180AD5CE006047C1 /* Supporting Files */,
+				A5D79325180AD8E3006047C1 /* Film.h */,
+				A5D79326180AD8E3006047C1 /* Film.m */,
 			);
 			path = LetoTest;
 			sourceTree = "<group>";
@@ -155,6 +174,19 @@
 				A5D7930E180AD5CE006047C1 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A5D7931B180AD703006047C1 /* TBXML */ = {
+			isa = PBXGroup;
+			children = (
+				A5D7931C180AD724006047C1 /* TBXML.m */,
+				A5D7931D180AD724006047C1 /* TBXML+Compression.m */,
+				A5D7931E180AD724006047C1 /* TBXML+HTTP.m */,
+				A5D7931F180AD724006047C1 /* TBXML.h */,
+				A5D79320180AD724006047C1 /* TBXML+Compression.h */,
+				A5D79321180AD724006047C1 /* TBXML+HTTP.h */,
+			);
+			name = TBXML;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,8 +287,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5D792F4180AD5CE006047C1 /* AppDelegate.m in Sources */,
+				A5D79327180AD8E3006047C1 /* Film.m in Sources */,
 				A5D792FA180AD5CE006047C1 /* MasterViewController.m in Sources */,
 				A5D792F0180AD5CE006047C1 /* main.m in Sources */,
+				A5D79322180AD724006047C1 /* TBXML.m in Sources */,
+				A5D79324180AD724006047C1 /* TBXML+HTTP.m in Sources */,
+				A5D79323180AD724006047C1 /* TBXML+Compression.m in Sources */,
 				A5D792FD180AD5CE006047C1 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
