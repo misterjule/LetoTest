@@ -92,6 +92,7 @@
 				}
 			}];
 			
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"FilmArray" object:filmArray];
 		}
     };
     

@@ -9,6 +9,7 @@
 #import "MasterViewController.h"
 
 #import "DetailViewController.h"
+#import "Film.h"
 
 @interface MasterViewController () {
     NSMutableArray *_objects;
@@ -26,10 +27,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-	self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-	UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-	self.navigationItem.rightBarButtonItem = addButton;
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupNewObjects:) name:@"FilmArray" object:nil];
+	
+//	self.navigationItem.leftBarButtonItem = self.editButtonItem;
+//
+//	UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+//	self.navigationItem.rightBarButtonItem = addButton;
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,6 +42,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc
+{
+	// Not used anymore to release objects since ARC, but needed to removeObserver from NotificationCentre
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+/*
 - (void)insertNewObject:(id)sender
 {
     if (!_objects) {
@@ -46,6 +57,25 @@
     [_objects insertObject:[NSDate date] atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+ */
+
+- (void)setupNewObjects:(NSNotification *)notice
+{
+	// Make sure we receive our Array of films
+	if ([[notice object] isKindOfClass:[NSMutableArray class]]) {
+		
+		NSMutableArray *array = [notice object];
+		
+		// Sort the array by title alphabetically
+		NSSortDescriptor *sortDesc = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+		[array sortUsingDescriptors:@[sortDesc]];
+		
+		_objects = nil;
+		_objects = array;
+		
+		[self.tableView reloadData];
+	}
 }
 
 #pragma mark - Table View
@@ -64,17 +94,19 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-	NSDate *object = _objects[indexPath.row];
-	cell.textLabel.text = [object description];
+	Film *object = _objects[indexPath.row];
+	cell.textLabel.text = [object title];
+	
     return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return NO;
 }
 
+/*
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -84,6 +116,7 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
 }
+ */
 
 /*
 // Override to support rearranging the table view.
@@ -105,7 +138,7 @@
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = _objects[indexPath.row];
+        Film *object = _objects[indexPath.row];
         [[segue destinationViewController] setDetailItem:object];
     }
 }

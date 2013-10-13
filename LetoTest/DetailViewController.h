@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailViewController : UIViewController
+@class Film;
 
-@property (strong, nonatomic) id detailItem;
+@interface DetailViewController : UIViewController <UIWebViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (strong, nonatomic) Film *detailItem;
+
 @end
